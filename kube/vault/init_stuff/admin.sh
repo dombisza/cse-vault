@@ -1,3 +1,5 @@
+# Create admin policy file
+cat <<EOF > admin-policy.hcl
 # Admin policy with wide-ranging capabilities
 path "sys/*" {
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
@@ -10,6 +12,10 @@ path "auth/*" {
 path "secret/*" {
   capabilities = ["create", "read", "update", "delete", "list"]
 }
+EOF
 
-#vault policy write admin admin.hcl
-#vault write auth/userpass/users/admin password=<your_password> policies=admin
+# Write the admin policy to Vault
+vault policy write admin admin-policy.hcl
+
+# Create an admin user
+vault write auth/userpass/users/admin password=adminpassword policies=admin
