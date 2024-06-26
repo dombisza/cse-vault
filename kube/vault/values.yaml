@@ -1,0 +1,27 @@
+global:
+  tlsDisable: true
+server:
+  service:
+    type: NodePort
+  networkPolicy:
+    enabled: false
+  ha:
+    enabled: false
+    replicas: 1
+  dataStorage:
+    storageClass: csi-disk-topology
+  dev:
+    enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: cce
+    hosts:
+    - host: cse-vault.sdombi.hu
+    tls:
+    - secretName: vault-tls
+      hosts:
+        - cse-vault.sdombi.hu
+    annotations:
+      kubernetes.io/elb.port: '443'
+      kubernetes.io/elb.class: union
+      kubernetes.io/elb.autocreate: '{"name":"vault-ingress","type":"public","bandwidth_name":"cce-bandwidth-1719389058843","bandwidth_chargemode":"traffic","bandwidth_size":5,"bandwidth_sharetype":"PER","eip_type":"5_mailbgp"}'

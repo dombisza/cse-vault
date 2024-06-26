@@ -1,0 +1,12 @@
+repositories:
+- name: hashicorp 
+  url: https://helm.releases.hashicorp.com 
+releases:
+  - name: vault 
+    chart: hashicorp/vault 
+    namespace: vault 
+    version: v0.28.0 
+    values:
+      - values.yaml
+helmDefaults:
+  createNamespace: true
