@@ -1,3 +1,6 @@
+vault auth enable userpass
+
+
 # Create admin policy file
 cat <<EOF > admin-policy.hcl
 # Admin policy with wide-ranging capabilities
